@@ -85,3 +85,15 @@ h6 {
 }
 
 /**********************MAIN CSS************************/
+.libraryDisplayContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 20%));
+    padding: 1em;
+    gap: 10px;
+}
+
+.bookContainer {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 1em;
+}

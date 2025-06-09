@@ -1,6 +1,16 @@
 let libraryDisplayContainer = document.querySelector(".libraryDisplayContainer");
-
+let addBookBtn = document.querySelector(".addBookBtn");
+let closeDialogBtn = document.querySelector(".closeDialogBtn");
+let dialog = document.querySelector("dialog");
 let library = [];
+
+addBookBtn.addEventListener("click", (e) => {
+    dialog.showModal();
+});
+
+closeDialogBtn.addEventListener("click", (e) => {
+    dialog.close();
+});
 
 function Book(title, author, pages) {
     this.id = crypto.randomUUID();

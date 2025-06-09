@@ -9,12 +9,51 @@
     <script src="./javascript.js" defer></script>
 </head>
 
+<!-- ESTILIZAR EL FORMULARIO Y EL DIALOG, ASÍ COMO LOS BOTONES
+ ADAPTAR LA LÓGICA
+  -->
+
 <body>
     <button class="addBookBtn">Add Book</button>
+
     <dialog>
         <button autofocus class="closeDialogBtn">X</button>
-        <p>form with thigs</p>
+
+        <form>
+            <h1>Add a new book!</h1>
+            <section class="bookDetails">
+                <div>
+                    <label for="title">
+                        <span>Title</span>
+                    </label>
+                    <input type="text" id="title" name="book_title" maxlength="100">
+                </div>
+                <div>
+                    <label for="author">
+                        <span>Author</span>
+                    </label>
+                    <input type="text" id="author" name="book_author" maxlength="100">
+                </div>
+                <div>
+                    <label for="pages">
+                        <span>Number of pages</span>
+                    </label>
+                    <input type="number" id="pages" name="book_pages">
+                </div>
+                <div>
+                    <label for="read">
+                        <span>Did you read this book?</span>
+                    </label>
+                    <select id="read" name="book_read">
+                        <option value="true">Read</option>
+                        <option value="false">Not Read Yet</option>
+                    </select>
+                </div>
+            </section>
+        </form>
+
     </dialog>
+
     <div class="libraryDisplayContainer">
 
     </div>

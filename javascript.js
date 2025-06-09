@@ -12,16 +12,17 @@ closeDialogBtn.addEventListener("click", (e) => {
     dialog.close();
 });
 
-function Book(title, author, pages) {
+function Book(title, author, pages, read) {
     this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
     this.pages = pages;
+    this.read = read;
 }
 
-function addBookToLibrary(title, author, pages) {
+function addBookToLibrary(title, author, pages, read) {
 
-    library.push(new Book(title, author, pages));
+    library.push(new Book(title, author, pages, read));
 
     updateLibrary();
 
@@ -42,7 +43,10 @@ function updateLibrary() {
         const pages = document.createElement("h3");
         pages.textContent = "Pages: " + book.pages;
 
-        bookContainer.append(title, author, pages);
+        const read = document.createElement("h4");
+        read.textContent = book.read;
+
+        bookContainer.append(title, author, pages, read);
 
         libraryDisplayContainer.appendChild(bookContainer);
     });

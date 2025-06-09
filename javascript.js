@@ -44,7 +44,7 @@ function updateLibrary() {
         pages.textContent = "Pages: " + book.pages;
 
         const read = document.createElement("h4");
-        read.textContent = book.read;
+        read.textContent = book.read ? "Read." : "Not read yet.";
 
         bookContainer.append(title, author, pages, read);
 

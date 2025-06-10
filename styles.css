@@ -97,3 +97,33 @@ h6 {
     border-radius: 10px;
     padding: 1em;
 }
+
+dialog[open] {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    min-width: 300px;
+}
+
+.closeDialogBtn {
+    align-self: flex-end;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bookDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.bookDetails>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

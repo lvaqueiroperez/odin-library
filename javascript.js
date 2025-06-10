@@ -58,7 +58,11 @@ function updateLibrary() {
         const read = document.createElement("h4");
         read.textContent = +book.read ? "Read." : "Not read yet.";
 
-        bookContainer.append(title, author, pages, read);
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "X";
+        deleteBtn.setAttribute("type", "button");
+
+        bookContainer.append(title, author, pages, read, deleteBtn);
 
         libraryDisplayContainer.appendChild(bookContainer);
     });

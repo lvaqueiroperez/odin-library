@@ -24,6 +24,21 @@ submitBookBtn.addEventListener("click", (e) => {
 
 });
 
+libraryDisplayContainer.addEventListener("click", (e) => {
+
+    if (e.target.className === "deleteBookBtn") {
+
+        bookIdRemove = e.target.parentElement.dataset.bookId;
+        library.forEach((book, index) => {
+            if (book.id === bookIdRemove) {
+                library.splice(index, 1);
+                updateLibrary();
+            }
+        });
+
+    }
+});
+
 function Book(title, author, pages, read) {
     this.id = crypto.randomUUID();
     this.title = title;
@@ -61,8 +76,10 @@ function updateLibrary() {
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "X";
         deleteBtn.setAttribute("type", "button");
+        deleteBtn.setAttribute("class", "deleteBookBtn");
 
         bookContainer.append(title, author, pages, read, deleteBtn);
+        bookContainer.setAttribute("data-book-id", book.id);
 
         libraryDisplayContainer.appendChild(bookContainer);
     });

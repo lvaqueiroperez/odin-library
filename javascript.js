@@ -2,7 +2,10 @@ let libraryDisplayContainer = document.querySelector(".libraryDisplayContainer")
 let addBookBtn = document.querySelector(".addBookBtn");
 let closeDialogBtn = document.querySelector(".closeDialogBtn");
 let dialog = document.querySelector("dialog");
-let library = [];
+
+let library = [new Book("The Hobbit", "Tolkien", 300, false)];
+
+updateLibrary();
 
 addBookBtn.addEventListener("click", (e) => {
     dialog.showModal();

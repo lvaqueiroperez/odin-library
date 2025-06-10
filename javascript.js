@@ -2,8 +2,9 @@ let libraryDisplayContainer = document.querySelector(".libraryDisplayContainer")
 let addBookBtn = document.querySelector(".addBookBtn");
 let closeDialogBtn = document.querySelector(".closeDialogBtn");
 let dialog = document.querySelector("dialog");
+let submitBookBtn = document.querySelector(".submitBookBtn");
 
-let library = [new Book("The Hobbit", "Tolkien", 300, false)];
+let library = [new Book("The Hobbit", "Tolkien", 300, 0)];
 
 updateLibrary();
 
@@ -13,6 +14,14 @@ addBookBtn.addEventListener("click", (e) => {
 
 closeDialogBtn.addEventListener("click", (e) => {
     dialog.close();
+});
+
+submitBookBtn.addEventListener("click", (e) => {
+
+    let bookDetails = Array.from(document.querySelectorAll("input, select"));
+
+    addBookToLibrary(bookDetails[0].value, bookDetails[1].value, bookDetails[2].value, bookDetails[3].value);
+
 });
 
 function Book(title, author, pages, read) {
@@ -47,7 +56,7 @@ function updateLibrary() {
         pages.textContent = "Pages: " + book.pages;
 
         const read = document.createElement("h4");
-        read.textContent = book.read ? "Read." : "Not read yet.";
+        read.textContent = +book.read ? "Read." : "Not read yet.";
 
         bookContainer.append(title, author, pages, read);
 

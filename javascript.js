@@ -4,7 +4,11 @@ let closeDialogBtn = document.querySelector(".closeDialogBtn");
 let dialog = document.querySelector("dialog");
 let submitBookBtn = document.querySelector(".submitBookBtn");
 
-let library = [new Book("The Hobbit", "Tolkien", 300, 0)];
+let library = [
+    new Book("The Hobbit", "Tolkien", 300, 0),
+    new Book("The Lord of the Rings", "Tolkien", 700, 1),
+    new Book("The Two Towers", "Tolkien", 1000, 1)
+];
 
 updateLibrary();
 // usar un poco más event delegation? hacerlo y comprobar la mejora de rendimiento!

@@ -40,6 +40,15 @@ libraryDisplayContainer.addEventListener("click", (e) => {
 
         case "toggleReadBtn":
 
+            // find the object and use its prototype method! Use the suited array method!
+            bookIdToggle = e.target.parentElement.dataset.bookId;
+
+            const bookToToggle = library.find((book) => { return book.id === bookIdToggle });
+
+            bookToToggle.toggleRead();
+
+            updateLibrary();
+
             break;
 
     }

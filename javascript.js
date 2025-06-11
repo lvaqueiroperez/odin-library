@@ -76,7 +76,12 @@ function updateLibrary() {
         deleteBtn.setAttribute("type", "button");
         deleteBtn.setAttribute("class", "deleteBookBtn");
 
-        bookContainer.append(title, author, pages, read, deleteBtn);
+        const toggleReadBtn = document.createElement("button");
+        toggleReadBtn.textContent = +book.read ? "Read" : "Not read yet";
+        toggleReadBtn.setAttribute("type", "button");
+        toggleReadBtn.setAttribute("class", "toggleReadBtn");
+
+        bookContainer.append(title, author, pages, read, deleteBtn, toggleReadBtn);
         bookContainer.setAttribute("data-book-id", book.id);
 
         libraryDisplayContainer.appendChild(bookContainer);

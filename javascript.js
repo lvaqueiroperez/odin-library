@@ -7,7 +7,7 @@ let submitBookBtn = document.querySelector(".submitBookBtn");
 let library = [new Book("The Hobbit", "Tolkien", 300, 0)];
 
 updateLibrary();
-
+// usar un poco más event delegation? hacerlo y comprobar la mejora de rendimiento!
 addBookBtn.addEventListener("click", (e) => {
     dialog.showModal();
 });
@@ -29,13 +29,11 @@ libraryDisplayContainer.addEventListener("click", (e) => {
     if (e.target.className === "deleteBookBtn") {
 
         bookIdRemove = e.target.parentElement.dataset.bookId;
-        library.forEach((book, index) => {
-            if (book.id === bookIdRemove) {
-                library.splice(index, 1);
-                updateLibrary();
-            }
-        });
 
+        // use .findIndex to be able to stop iterating the array once the condition is met
+        library.splice(library.findIndex((book) => book.id === bookIdRemove), 1);
+
+        updateLibrary();
     }
 });
 

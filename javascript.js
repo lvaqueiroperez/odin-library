@@ -72,7 +72,7 @@ function updateLibrary() {
         read.textContent = +book.read ? "Read." : "Not read yet.";
 
         const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "X";
+        deleteBtn.textContent = "DELETE";
         deleteBtn.setAttribute("type", "button");
         deleteBtn.setAttribute("class", "deleteBookBtn");
 

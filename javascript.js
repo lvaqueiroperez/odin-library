@@ -11,20 +11,30 @@ let library = [
 ];
 
 updateLibrary();
-// usar un poco más event delegation? hacerlo y comprobar la mejora de rendimiento!
+
 addBookBtn.addEventListener("click", (e) => {
     dialog.showModal();
 });
 
-closeDialogBtn.addEventListener("click", (e) => {
-    dialog.close();
-});
+dialog.addEventListener("click", (e) => {
 
-submitBookBtn.addEventListener("click", (e) => {
+    switch (e.target.className) {
 
-    let bookDetails = Array.from(document.querySelectorAll("input, select"));
+        case "closeDialogBtn":
 
-    addBookToLibrary(bookDetails[0].value, bookDetails[1].value, bookDetails[2].value, bookDetails[3].value);
+            dialog.close();
+
+            break;
+
+        case "submitBookBtn":
+
+            let bookDetails = Array.from(document.querySelectorAll("input, select"));
+
+            addBookToLibrary(bookDetails[0].value, bookDetails[1].value, bookDetails[2].value, bookDetails[3].value);
+
+            break;
+
+    }
 
 });
 

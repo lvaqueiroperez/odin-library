@@ -26,15 +26,24 @@ submitBookBtn.addEventListener("click", (e) => {
 
 libraryDisplayContainer.addEventListener("click", (e) => {
 
-    if (e.target.className === "deleteBookBtn") {
+    switch (e.target.className) {
 
-        bookIdRemove = e.target.parentElement.dataset.bookId;
+        case "deleteBookBtn":
+            bookIdRemove = e.target.parentElement.dataset.bookId;
 
-        // use .findIndex to be able to stop iterating the array once the condition is met
-        library.splice(library.findIndex((book) => book.id === bookIdRemove), 1);
+            // use .findIndex to be able to stop iterating the array once the condition is met
+            library.splice(library.findIndex((book) => book.id === bookIdRemove), 1);
 
-        updateLibrary();
+            updateLibrary();
+
+            break;
+
+        case "toggleReadBtn":
+
+            break;
+
     }
+
 });
 
 function Book(title, author, pages, read) {

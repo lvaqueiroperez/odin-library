@@ -6,6 +6,22 @@ let closeDialogBtn = document.querySelector(".closeDialogBtn");
 let dialog = document.querySelector("dialog");
 let submitBookBtn = document.querySelector(".submitBookBtn");
 
+class Book {
+
+    constructor(title, author, pages, read) {
+        this.id = crypto.randomUUID();
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+
+    // pendiente este problemilla donde el primer toggle sin leer no responde...
+    toggleRead() {
+        this.read = this.read === 0 ? 1 : 0;
+    }
+}
+
 class Library {
 
     library = [
@@ -68,22 +84,6 @@ class Library {
         booksToRemove.forEach((book) => { book.remove() });
     }
 
-}
-
-class Book {
-
-    constructor(title, author, pages, read) {
-        this.id = crypto.randomUUID();
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.read = read;
-    }
-
-    // pendiente este problemilla donde el primer toggle sin leer no responde...
-    toggleRead() {
-        this.read = this.read === 0 ? 1 : 0;
-    }
 }
 
 

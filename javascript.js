@@ -1,3 +1,5 @@
+// New Branch to practice JS Classes
+
 let libraryDisplayContainer = document.querySelector(".libraryDisplayContainer");
 let addBookBtn = document.querySelector(".addBookBtn");
 let closeDialogBtn = document.querySelector(".closeDialogBtn");

@@ -94,6 +94,7 @@ library.updateLibrary();
 
 
 // EVENT LISTENERS
+// PENDIENTE DE PONERLO EN UN MÓDULO PARA MÁS ORDEN (MÓDULO U OTRO PATRÓN DE DISEÑO...?)
 addBookBtn.addEventListener("click", (e) => {
     dialog.showModal();
 });

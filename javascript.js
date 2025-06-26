@@ -86,6 +86,8 @@ class Book {
     }
 }
 
+
+//Creation of the library object and library initialization
 const library = new Library();
 
 library.updateLibrary();

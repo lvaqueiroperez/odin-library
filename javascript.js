@@ -22,6 +22,11 @@ class Library {
 
     }
 
+    removeBookFromLibrary(bookIdRemove) {
+        // use .findIndex to be able to stop iterating the array once the condition is met
+        this.library.splice(library.library.findIndex((book) => book.id === bookIdRemove), 1);
+    }
+
     updateLibrary() {
 
         this.removeLibrary();
@@ -118,8 +123,7 @@ libraryDisplayContainer.addEventListener("click", (e) => {
         case "deleteBookBtn":
             bookIdRemove = e.target.parentElement.dataset.bookId;
 
-            // use .findIndex to be able to stop iterating the array once the condition is met
-            library.library.splice(library.library.findIndex((book) => book.id === bookIdRemove), 1);
+            library.removeBookFromLibrary(bookIdRemove);
 
             library.updateLibrary();
 

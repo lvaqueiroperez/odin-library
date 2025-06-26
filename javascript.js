@@ -6,6 +6,65 @@ let closeDialogBtn = document.querySelector(".closeDialogBtn");
 let dialog = document.querySelector("dialog");
 let submitBookBtn = document.querySelector(".submitBookBtn");
 
+class Library {
+
+    library = [
+        new Book("The Hobbit", "Tolkien", 300, 0),
+        new Book("The Lord of the Rings", "Tolkien", 700, 1),
+        new Book("The Two Towers", "Tolkien", 1000, 1)
+    ];
+
+    addBookToLibrary(title, author, pages, read) {
+
+        this.library.push(new Book(title, author, pages, read));
+
+        this.updateLibrary();
+
+    }
+
+    updateLibrary() {
+
+        this.removeLibrary();
+
+        this.library.forEach((book) => {
+            let bookContainer = document.createElement("div");
+            bookContainer.setAttribute("class", "bookContainer");
+
+            const title = document.createElement("h1");
+            title.textContent = book.title;
+            const author = document.createElement("h2");
+            author.textContent = book.author;
+            const pages = document.createElement("h3");
+            pages.textContent = "Pages: " + book.pages;
+
+            const read = document.createElement("h4");
+            read.textContent = +book.read ? "Read." : "Not read yet.";
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "DELETE";
+            deleteBtn.setAttribute("type", "button");
+            deleteBtn.setAttribute("class", "deleteBookBtn");
+
+            const toggleReadBtn = document.createElement("button");
+            toggleReadBtn.textContent = +book.read ? "Read" : "Not read yet";
+            toggleReadBtn.setAttribute("type", "button");
+            toggleReadBtn.setAttribute("class", "toggleReadBtn");
+
+            bookContainer.append(title, author, pages, read, deleteBtn, toggleReadBtn);
+            bookContainer.setAttribute("data-book-id", book.id);
+
+            libraryDisplayContainer.appendChild(bookContainer);
+        });
+
+    }
+
+    removeLibrary() {
+        let booksToRemove = document.querySelectorAll(".bookContainer");
+        booksToRemove.forEach((book) => { book.remove() });
+    }
+
+}
+
 class Book {
 
     constructor(title, author, pages, read) {
@@ -22,13 +81,9 @@ class Book {
     }
 }
 
-let library = [
-    new Book("The Hobbit", "Tolkien", 300, 0),
-    new Book("The Lord of the Rings", "Tolkien", 700, 1),
-    new Book("The Two Towers", "Tolkien", 1000, 1)
-];
+const library = new Library();
 
-updateLibrary();
+library.updateLibrary();
 
 addBookBtn.addEventListener("click", (e) => {
     dialog.showModal();
@@ -48,7 +103,7 @@ dialog.addEventListener("click", (e) => {
 
             let bookDetails = Array.from(document.querySelectorAll("input, select"));
 
-            addBookToLibrary(bookDetails[0].value, bookDetails[1].value, bookDetails[2].value, bookDetails[3].value);
+            library.addBookToLibrary(bookDetails[0].value, bookDetails[1].value, bookDetails[2].value, bookDetails[3].value);
 
             break;
 
@@ -64,9 +119,9 @@ libraryDisplayContainer.addEventListener("click", (e) => {
             bookIdRemove = e.target.parentElement.dataset.bookId;
 
             // use .findIndex to be able to stop iterating the array once the condition is met
-            library.splice(library.findIndex((book) => book.id === bookIdRemove), 1);
+            library.library.splice(library.library.findIndex((book) => book.id === bookIdRemove), 1);
 
-            updateLibrary();
+            library.updateLibrary();
 
             break;
 
@@ -75,63 +130,14 @@ libraryDisplayContainer.addEventListener("click", (e) => {
             // find the object and use its prototype method! Use the suited array method!
             bookIdToggle = e.target.parentElement.dataset.bookId;
 
-            const bookToToggle = library.find((book) => { return book.id === bookIdToggle });
+            const bookToToggle = library.library.find((book) => { return book.id === bookIdToggle });
 
             bookToToggle.toggleRead();
 
-            updateLibrary();
+            library.updateLibrary();
 
             break;
 
     }
 
 });
-
-function addBookToLibrary(title, author, pages, read) {
-
-    library.push(new Book(title, author, pages, read));
-
-    updateLibrary();
-
-}
-
-function updateLibrary() {
-
-    removeLibrary();
-
-    library.forEach((book) => {
-        let bookContainer = document.createElement("div");
-        bookContainer.setAttribute("class", "bookContainer");
-
-        const title = document.createElement("h1");
-        title.textContent = book.title;
-        const author = document.createElement("h2");
-        author.textContent = book.author;
-        const pages = document.createElement("h3");
-        pages.textContent = "Pages: " + book.pages;
-
-        const read = document.createElement("h4");
-        read.textContent = +book.read ? "Read." : "Not read yet.";
-
-        const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "DELETE";
-        deleteBtn.setAttribute("type", "button");
-        deleteBtn.setAttribute("class", "deleteBookBtn");
-
-        const toggleReadBtn = document.createElement("button");
-        toggleReadBtn.textContent = +book.read ? "Read" : "Not read yet";
-        toggleReadBtn.setAttribute("type", "button");
-        toggleReadBtn.setAttribute("class", "toggleReadBtn");
-
-        bookContainer.append(title, author, pages, read, deleteBtn, toggleReadBtn);
-        bookContainer.setAttribute("data-book-id", book.id);
-
-        libraryDisplayContainer.appendChild(bookContainer);
-    });
-
-}
-
-function removeLibrary() {
-    let booksToRemove = document.querySelectorAll(".bookContainer");
-    booksToRemove.forEach((book) => { book.remove() });
-}

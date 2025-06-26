@@ -6,6 +6,21 @@ let closeDialogBtn = document.querySelector(".closeDialogBtn");
 let dialog = document.querySelector("dialog");
 let submitBookBtn = document.querySelector(".submitBookBtn");
 
+class Book {
+
+    constructor(title, author, pages, read) {
+        this.id = crypto.randomUUID();
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+
+    toggleRead() {
+        this.read = this.read === 0 ? 1 : 0;
+    }
+}
+
 let library = [
     new Book("The Hobbit", "Tolkien", 300, 0),
     new Book("The Lord of the Rings", "Tolkien", 700, 1),
@@ -70,18 +85,6 @@ libraryDisplayContainer.addEventListener("click", (e) => {
     }
 
 });
-
-function Book(title, author, pages, read) {
-    this.id = crypto.randomUUID();
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
-
-Book.prototype.toggleRead = function () {
-    this.read = this.read === 0 ? 1 : 0;
-};
 
 function addBookToLibrary(title, author, pages, read) {
 

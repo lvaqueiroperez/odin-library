@@ -90,6 +90,8 @@ const library = new Library();
 
 library.updateLibrary();
 
+
+// EVENT LISTENERS
 addBookBtn.addEventListener("click", (e) => {
     dialog.showModal();
 });

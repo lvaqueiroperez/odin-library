@@ -29,6 +29,10 @@ class Library {
         new Book("The Two Towers", "Tolkien", 1000, 1)
     ];
 
+    getBookById(bookId) {
+        return this.library.find((book) => { return book.id === bookId });
+    }
+
     addBookToLibrary(title, author, pages, read) {
 
         this.library.push(new Book(title, author, pages, read));
@@ -138,7 +142,7 @@ libraryDisplayContainer.addEventListener("click", (e) => {
             // find the object and use its prototype method! Use the suited array method!
             bookIdToggle = e.target.parentElement.dataset.bookId;
 
-            const bookToToggle = library.library.find((book) => { return book.id === bookIdToggle });
+            const bookToToggle = library.getBookById(bookIdToggle);
 
             bookToToggle.toggleRead();
 

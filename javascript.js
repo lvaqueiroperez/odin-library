@@ -1,11 +1,5 @@
 // New Branch to practice JS Classes
 
-let libraryDisplayContainer = document.querySelector(".libraryDisplayContainer");
-let addBookBtn = document.querySelector(".addBookBtn");
-let closeDialogBtn = document.querySelector(".closeDialogBtn");
-let dialog = document.querySelector("dialog");
-let submitBookBtn = document.querySelector(".submitBookBtn");
-
 class Book {
 
     constructor(title, author, pages, read) {
@@ -96,8 +90,14 @@ const library = new Library();
 library.updateLibrary();
 
 
-// EVENT LISTENERS
+// DOM & EVENT LISTENERS
 // PENDIENTE DE PONERLO EN UN MÓDULO PARA MÁS ORDEN (MÓDULO U OTRO PATRÓN DE DISEÑO...?)
+let libraryDisplayContainer = document.querySelector(".libraryDisplayContainer");
+let addBookBtn = document.querySelector(".addBookBtn");
+let closeDialogBtn = document.querySelector(".closeDialogBtn");
+let dialog = document.querySelector("dialog");
+let submitBookBtn = document.querySelector(".submitBookBtn");
+
 addBookBtn.addEventListener("click", (e) => {
     dialog.showModal();
 });

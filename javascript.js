@@ -83,73 +83,81 @@ class Library {
 
 }
 
+// DOM & EVENT LISTENERS
+let libraryDisplayContainer = document.querySelector(".libraryDisplayContainer");
+let addBookBtn = document.querySelector(".addBookBtn");
+let dialog = document.querySelector("dialog");
+
+const initModule = (function () {
+
+    function bindEvents() {
+
+        addBookBtn.addEventListener("click", (e) => {
+            dialog.showModal();
+        });
+
+        dialog.addEventListener("click", (e) => {
+
+            switch (e.target.className) {
+
+                case "closeDialogBtn":
+
+                    dialog.close();
+
+                    break;
+
+                case "submitBookBtn":
+
+                    let bookDetails = Array.from(document.querySelectorAll("input, select"));
+
+                    library.addBookToLibrary(bookDetails[0].value, bookDetails[1].value, bookDetails[2].value, bookDetails[3].value);
+
+                    break;
+
+            }
+
+        });
+
+        libraryDisplayContainer.addEventListener("click", (e) => {
+
+            switch (e.target.className) {
+
+                case "deleteBookBtn":
+                    bookIdRemove = e.target.parentElement.dataset.bookId;
+
+                    library.removeBookFromLibrary(bookIdRemove);
+
+                    library.updateLibrary();
+
+                    break;
+
+                case "toggleReadBtn":
+
+                    // find the object and use its prototype method! Use the suited array method!
+                    bookIdToggle = e.target.parentElement.dataset.bookId;
+
+                    const bookToToggle = library.getBookById(bookIdToggle);
+
+                    bookToToggle.toggleRead();
+
+                    library.updateLibrary();
+
+                    break;
+
+            }
+
+        });
+
+    }
+
+    return { init: bindEvents };
+
+})();
+
 
 //Creation of the library object and library initialization
 const library = new Library();
 
+document.addEventListener("DOMContentLoaded", initModule.init);
+
 library.updateLibrary();
-
-
-// DOM & EVENT LISTENERS
-// PENDIENTE DE PONERLO EN UN MÓDULO PARA MÁS ORDEN (MÓDULO U OTRO PATRÓN DE DISEÑO...?)
-let libraryDisplayContainer = document.querySelector(".libraryDisplayContainer");
-let addBookBtn = document.querySelector(".addBookBtn");
-let closeDialogBtn = document.querySelector(".closeDialogBtn");
-let dialog = document.querySelector("dialog");
-let submitBookBtn = document.querySelector(".submitBookBtn");
-
-addBookBtn.addEventListener("click", (e) => {
-    dialog.showModal();
-});
-
-dialog.addEventListener("click", (e) => {
-
-    switch (e.target.className) {
-
-        case "closeDialogBtn":
-
-            dialog.close();
-
-            break;
-
-        case "submitBookBtn":
-
-            let bookDetails = Array.from(document.querySelectorAll("input, select"));
-
-            library.addBookToLibrary(bookDetails[0].value, bookDetails[1].value, bookDetails[2].value, bookDetails[3].value);
-
-            break;
-
-    }
-
-});
-
-libraryDisplayContainer.addEventListener("click", (e) => {
-
-    switch (e.target.className) {
-
-        case "deleteBookBtn":
-            bookIdRemove = e.target.parentElement.dataset.bookId;
-
-            library.removeBookFromLibrary(bookIdRemove);
-
-            library.updateLibrary();
-
-            break;
-
-        case "toggleReadBtn":
-
-            // find the object and use its prototype method! Use the suited array method!
-            bookIdToggle = e.target.parentElement.dataset.bookId;
-
-            const bookToToggle = library.getBookById(bookIdToggle);
-
-            bookToToggle.toggleRead();
-
-            library.updateLibrary();
-
-            break;
-
-    }
-
-});

@@ -91,6 +91,7 @@ let dialog = document.querySelector("dialog");
 
 const initModule = (function () {
 
+    // dont forget event delegation!
     function bindEvents() {
 
         addBookBtn.addEventListener("click", (e) => {

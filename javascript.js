@@ -13,10 +13,9 @@ class Book {
         this.title = title;
         this.author = author;
         this.pages = pages;
-        this.read = read;
+        this.read = +read;
     }
 
-    // pendiente este problemilla donde el primer toggle sin leer no responde...
     toggleRead() {
         this.read = this.read === 0 ? 1 : 0;
     }

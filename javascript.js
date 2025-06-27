@@ -1,5 +1,6 @@
 // New Branch to practice JS Classes
 
+// **************CLASSES****************
 class Book {
 
     constructor(title, author, pages, read) {
@@ -83,7 +84,7 @@ class Library {
 
 }
 
-// DOM & EVENT LISTENERS
+// ************* DOM & EVENT LISTENERS ******************
 let libraryDisplayContainer = document.querySelector(".libraryDisplayContainer");
 let addBookBtn = document.querySelector(".addBookBtn");
 let dialog = document.querySelector("dialog");
@@ -155,7 +156,7 @@ const initModule = (function () {
 })();
 
 
-//Creation of the library object and library initialization
+//************** INITIALIZATION ******************
 // Estamos usando código de backend en el frontend, lo cual es peligroso porque damos
 // acceso directo a los users a los objetos y al contenido lógico de nuestra página
 // Ya aprenderemos en las lecciones de back a que todo esto esté bien organizado y seguro

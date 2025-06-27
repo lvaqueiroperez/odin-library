@@ -18,19 +18,19 @@ class Book {
 
 class Library {
 
-    library = [
+    static #library = [
         new Book("The Hobbit", "Tolkien", 300, 0),
         new Book("The Lord of the Rings", "Tolkien", 700, 1),
         new Book("The Two Towers", "Tolkien", 1000, 1)
     ];
 
     getBookById(bookId) {
-        return this.library.find((book) => { return book.id === bookId });
+        return Library.#library.find((book) => { return book.id === bookId });
     }
 
     addBookToLibrary(title, author, pages, read) {
 
-        this.library.push(new Book(title, author, pages, read));
+        Library.#library.push(new Book(title, author, pages, read));
 
         this.updateLibrary();
 
@@ -38,14 +38,14 @@ class Library {
 
     removeBookFromLibrary(bookIdRemove) {
         // use .findIndex to be able to stop iterating the array once the condition is met
-        this.library.splice(library.library.findIndex((book) => book.id === bookIdRemove), 1);
+        Library.#library.splice(Library.#library.findIndex((book) => book.id === bookIdRemove), 1);
     }
 
     updateLibrary() {
 
         this.removeLibrary();
 
-        this.library.forEach((book) => {
+        Library.#library.forEach((book) => {
             let bookContainer = document.createElement("div");
             bookContainer.setAttribute("class", "bookContainer");
 

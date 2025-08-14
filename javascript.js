@@ -78,7 +78,7 @@ function Book(title, author, pages, read) {
 }
 
 Book.prototype.toggleRead = function () {
-    this.read = this.read === 0 ? 1 : 0;
+    this.read = +this.read === 0 ? 1 : 0;
 };
 
 function addBookToLibrary(title, author, pages, read) {
@@ -126,6 +126,9 @@ function updateLibrary() {
 }
 
 function removeLibrary() {
+    // La primera vez que se carga la página no existirá ningún ".bookContainer" hasta
+    // que se ejecute la línea debajo de "removeLibrary(), línea 96".
+    // No da error y funciona, así que de momento lo dejaré estar.
     let booksToRemove = document.querySelectorAll(".bookContainer");
     booksToRemove.forEach((book) => { book.remove() });
 }

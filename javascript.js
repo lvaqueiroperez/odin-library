@@ -39,11 +39,13 @@ class Library {
     removeBookFromLibrary(bookIdRemove) {
         // use .findIndex to be able to stop iterating the array once the condition is met
         Library.#library.splice(Library.#library.findIndex((book) => book.id === bookIdRemove), 1);
+
+        this.updateLibrary();
     }
 
     updateLibrary() {
 
-        this.removeLibrary();
+        this.removeDOMLibrary();
 
         Library.#library.forEach((book) => {
             let bookContainer = document.createElement("div");
@@ -77,7 +79,7 @@ class Library {
 
     }
 
-    removeLibrary() {
+    removeDOMLibrary() {
         let booksToRemove = document.querySelectorAll(".bookContainer");
         booksToRemove.forEach((book) => { book.remove() });
     }
@@ -125,18 +127,16 @@ const initModule = (function () {
             switch (e.target.className) {
 
                 case "deleteBookBtn":
-                    bookIdRemove = e.target.parentElement.dataset.bookId;
+                    let bookIdRemove = e.target.parentElement.dataset.bookId;
 
                     library.removeBookFromLibrary(bookIdRemove);
-
-                    library.updateLibrary();
 
                     break;
 
                 case "toggleReadBtn":
 
                     // find the object and use its prototype method! Use the suited array method!
-                    bookIdToggle = e.target.parentElement.dataset.bookId;
+                    let bookIdToggle = e.target.parentElement.dataset.bookId;
 
                     const bookToToggle = library.getBookById(bookIdToggle);
 

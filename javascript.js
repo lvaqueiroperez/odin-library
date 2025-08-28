@@ -108,7 +108,6 @@ const initModule = (function () {
     });
 
     dialog.addEventListener("click", (e) => {
-      const submitBookBtn = document.getElementById("submitBookBtn");
       const form = document.querySelector("#addBookForm");
 
       switch (e.target.className) {
@@ -118,6 +117,7 @@ const initModule = (function () {
           break;
 
         case "submitBookBtn":
+          // con esto evito usar el botón con type="submit", simplemente me fijo en el click del botón
           if (form.checkValidity()) {
             let bookDetails = Array.from(
               document.querySelectorAll("input, select")

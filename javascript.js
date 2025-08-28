@@ -108,6 +108,9 @@ const initModule = (function () {
     });
 
     dialog.addEventListener("click", (e) => {
+      const submitBookBtn = document.getElementById("submitBookBtn");
+      const form = document.querySelector("#addBookForm");
+
       switch (e.target.className) {
         case "closeDialogBtn":
           dialog.close();
@@ -115,16 +118,20 @@ const initModule = (function () {
           break;
 
         case "submitBookBtn":
-          let bookDetails = Array.from(
-            document.querySelectorAll("input, select")
-          );
+          if (form.checkValidity()) {
+            let bookDetails = Array.from(
+              document.querySelectorAll("input, select")
+            );
 
-          library.addBookToLibrary(
-            bookDetails[0].value,
-            bookDetails[1].value,
-            bookDetails[2].value,
-            bookDetails[3].value
-          );
+            library.addBookToLibrary(
+              bookDetails[0].value,
+              bookDetails[1].value,
+              bookDetails[2].value,
+              bookDetails[3].value
+            );
+          } else {
+            console.log("not valid!");
+          }
 
           break;
       }

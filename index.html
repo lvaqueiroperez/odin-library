@@ -6,7 +6,6 @@
     <title>Odin Library</title>
     <link rel="stylesheet" href="./styles.css" />
     <script src="./javascript.js" defer></script>
-    <script src="./forms.js" defer></script>
   </head>
 
   <!-- ESTILIZAR EL FORMULARIO Y EL DIALOG, ASÍ COMO LOS BOTONES
@@ -30,7 +29,8 @@
               type="text"
               id="title"
               name="book_title"
-              maxlength="100"
+              maxlength="15"
+              minlength="4"
               required
             />
           </div>
@@ -62,7 +62,9 @@
             </select>
           </div>
           <div>
-            <button type="button" id="submitBookBtn" class="submitBookBtn">Submit</button>
+            <button type="button" id="submitBookBtn" class="submitBookBtn">
+              Submit
+            </button>
           </div>
         </section>
       </form>

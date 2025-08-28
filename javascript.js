@@ -2,160 +2,160 @@
 
 // **************CLASSES****************
 class Book {
+  constructor(title, author, pages, read) {
+    this.id = crypto.randomUUID();
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = +read;
+  }
 
-    constructor(title, author, pages, read) {
-        this.id = crypto.randomUUID();
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.read = +read;
-    }
-
-    toggleRead() {
-        this.read = this.read === 0 ? 1 : 0;
-    }
+  toggleRead() {
+    this.read = this.read === 0 ? 1 : 0;
+  }
 }
 
 class Library {
+  static #library = [
+    new Book("The Hobbit", "Tolkien", 300, 0),
+    new Book("The Lord of the Rings", "Tolkien", 700, 1),
+    new Book("The Two Towers", "Tolkien", 1000, 1),
+  ];
 
-    static #library = [
-        new Book("The Hobbit", "Tolkien", 300, 0),
-        new Book("The Lord of the Rings", "Tolkien", 700, 1),
-        new Book("The Two Towers", "Tolkien", 1000, 1)
-    ];
+  getBookById(bookId) {
+    return Library.#library.find((book) => {
+      return book.id === bookId;
+    });
+  }
 
-    getBookById(bookId) {
-        return Library.#library.find((book) => { return book.id === bookId });
-    }
+  addBookToLibrary(title, author, pages, read) {
+    Library.#library.push(new Book(title, author, pages, read));
 
-    addBookToLibrary(title, author, pages, read) {
+    this.updateLibrary();
+  }
 
-        Library.#library.push(new Book(title, author, pages, read));
+  removeBookFromLibrary(bookIdRemove) {
+    // use .findIndex to be able to stop iterating the array once the condition is met
+    Library.#library.splice(
+      Library.#library.findIndex((book) => book.id === bookIdRemove),
+      1
+    );
 
-        this.updateLibrary();
+    this.updateLibrary();
+  }
 
-    }
+  updateLibrary() {
+    this.removeDOMLibrary();
 
-    removeBookFromLibrary(bookIdRemove) {
-        // use .findIndex to be able to stop iterating the array once the condition is met
-        Library.#library.splice(Library.#library.findIndex((book) => book.id === bookIdRemove), 1);
+    Library.#library.forEach((book) => {
+      let bookContainer = document.createElement("div");
+      bookContainer.setAttribute("class", "bookContainer");
 
-        this.updateLibrary();
-    }
+      const title = document.createElement("h1");
+      title.textContent = book.title;
+      const author = document.createElement("h2");
+      author.textContent = book.author;
+      const pages = document.createElement("h3");
+      pages.textContent = "Pages: " + book.pages;
 
-    updateLibrary() {
+      const read = document.createElement("h4");
+      read.textContent = +book.read ? "Read." : "Not read yet.";
 
-        this.removeDOMLibrary();
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "DELETE";
+      deleteBtn.setAttribute("type", "button");
+      deleteBtn.setAttribute("class", "deleteBookBtn");
 
-        Library.#library.forEach((book) => {
-            let bookContainer = document.createElement("div");
-            bookContainer.setAttribute("class", "bookContainer");
+      const toggleReadBtn = document.createElement("button");
+      toggleReadBtn.textContent = +book.read ? "Read" : "Not read yet";
+      toggleReadBtn.setAttribute("type", "button");
+      toggleReadBtn.setAttribute("class", "toggleReadBtn");
 
-            const title = document.createElement("h1");
-            title.textContent = book.title;
-            const author = document.createElement("h2");
-            author.textContent = book.author;
-            const pages = document.createElement("h3");
-            pages.textContent = "Pages: " + book.pages;
+      bookContainer.append(
+        title,
+        author,
+        pages,
+        read,
+        deleteBtn,
+        toggleReadBtn
+      );
+      bookContainer.setAttribute("data-book-id", book.id);
 
-            const read = document.createElement("h4");
-            read.textContent = +book.read ? "Read." : "Not read yet.";
+      libraryDisplayContainer.appendChild(bookContainer);
+    });
+  }
 
-            const deleteBtn = document.createElement("button");
-            deleteBtn.textContent = "DELETE";
-            deleteBtn.setAttribute("type", "button");
-            deleteBtn.setAttribute("class", "deleteBookBtn");
-
-            const toggleReadBtn = document.createElement("button");
-            toggleReadBtn.textContent = +book.read ? "Read" : "Not read yet";
-            toggleReadBtn.setAttribute("type", "button");
-            toggleReadBtn.setAttribute("class", "toggleReadBtn");
-
-            bookContainer.append(title, author, pages, read, deleteBtn, toggleReadBtn);
-            bookContainer.setAttribute("data-book-id", book.id);
-
-            libraryDisplayContainer.appendChild(bookContainer);
-        });
-
-    }
-
-    removeDOMLibrary() {
-        let booksToRemove = document.querySelectorAll(".bookContainer");
-        booksToRemove.forEach((book) => { book.remove() });
-    }
-
+  removeDOMLibrary() {
+    let booksToRemove = document.querySelectorAll(".bookContainer");
+    booksToRemove.forEach((book) => {
+      book.remove();
+    });
+  }
 }
 
 // ************* DOM & EVENT LISTENERS ******************
-let libraryDisplayContainer = document.querySelector(".libraryDisplayContainer");
+let libraryDisplayContainer = document.querySelector(
+  ".libraryDisplayContainer"
+);
 let addBookBtn = document.querySelector(".addBookBtn");
 let dialog = document.querySelector("dialog");
 
 const initModule = (function () {
+  // dont forget event delegation!
+  function bindEvents() {
+    addBookBtn.addEventListener("click", (e) => {
+      dialog.showModal();
+    });
 
-    // dont forget event delegation!
-    function bindEvents() {
+    dialog.addEventListener("click", (e) => {
+      switch (e.target.className) {
+        case "closeDialogBtn":
+          dialog.close();
 
-        addBookBtn.addEventListener("click", (e) => {
-            dialog.showModal();
-        });
+          break;
 
-        dialog.addEventListener("click", (e) => {
+        case "submitBookBtn":
+          let bookDetails = Array.from(
+            document.querySelectorAll("input, select")
+          );
 
-            switch (e.target.className) {
+          library.addBookToLibrary(
+            bookDetails[0].value,
+            bookDetails[1].value,
+            bookDetails[2].value,
+            bookDetails[3].value
+          );
 
-                case "closeDialogBtn":
+          break;
+      }
+    });
 
-                    dialog.close();
+    libraryDisplayContainer.addEventListener("click", (e) => {
+      switch (e.target.className) {
+        case "deleteBookBtn":
+          let bookIdRemove = e.target.parentElement.dataset.bookId;
 
-                    break;
+          library.removeBookFromLibrary(bookIdRemove);
 
-                case "submitBookBtn":
+          break;
 
-                    let bookDetails = Array.from(document.querySelectorAll("input, select"));
+        case "toggleReadBtn":
+          // find the object and use its prototype method! Use the suited array method!
+          let bookIdToggle = e.target.parentElement.dataset.bookId;
 
-                    library.addBookToLibrary(bookDetails[0].value, bookDetails[1].value, bookDetails[2].value, bookDetails[3].value);
+          const bookToToggle = library.getBookById(bookIdToggle);
 
-                    break;
+          bookToToggle.toggleRead();
 
-            }
+          library.updateLibrary();
 
-        });
+          break;
+      }
+    });
+  }
 
-        libraryDisplayContainer.addEventListener("click", (e) => {
-
-            switch (e.target.className) {
-
-                case "deleteBookBtn":
-                    let bookIdRemove = e.target.parentElement.dataset.bookId;
-
-                    library.removeBookFromLibrary(bookIdRemove);
-
-                    break;
-
-                case "toggleReadBtn":
-
-                    // find the object and use its prototype method! Use the suited array method!
-                    let bookIdToggle = e.target.parentElement.dataset.bookId;
-
-                    const bookToToggle = library.getBookById(bookIdToggle);
-
-                    bookToToggle.toggleRead();
-
-                    library.updateLibrary();
-
-                    break;
-
-            }
-
-        });
-
-    }
-
-    return { init: bindEvents };
-
+  return { init: bindEvents };
 })();
-
 
 //************** INITIALIZATION ******************
 // Estamos usando código de backend en el frontend, lo cual es peligroso porque damos

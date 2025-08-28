@@ -2,35 +2,35 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* 2. Remove default margin */
 * {
-    margin: 0;
+  margin: 0;
 }
 
 html {
-    /*stretch body to full viewport height*/
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
+  /*stretch body to full viewport height*/
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 3. Enable keyword animations */
 @media (prefers-reduced-motion: no-preference) {
-    html {
-        interpolate-size: allow-keywords;
-    }
+  html {
+    interpolate-size: allow-keywords;
+  }
 }
 
 body {
-    /* 4. Add accessible line-height */
-    line-height: 1.5;
-    /* 5. Improve text rendering */
-    -webkit-font-smoothing: antialiased;
-    /*stretch body to full viewport height*/
-    flex-grow: 1;
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+  /*stretch body to full viewport height*/
+  flex-grow: 1;
 }
 
 /* 6. Improve media defaults */
@@ -39,8 +39,8 @@ picture,
 video,
 canvas,
 svg {
-    display: block;
-    max-width: 100%;
+  display: block;
+  max-width: 100%;
 }
 
 /* 7. Inherit fonts for form controls */
@@ -48,7 +48,7 @@ input,
 button,
 textarea,
 select {
-    font: inherit;
+  font: inherit;
 }
 
 /* 8. Avoid text overflows */
@@ -59,12 +59,12 @@ h3,
 h4,
 h5,
 h6 {
-    overflow-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* 9. Improve line wrapping */
 p {
-    text-wrap: pretty;
+  text-wrap: pretty;
 }
 
 h1,
@@ -73,7 +73,7 @@ h3,
 h4,
 h5,
 h6 {
-    text-wrap: balance;
+  text-wrap: balance;
 }
 
 /*
@@ -81,52 +81,52 @@ h6 {
   */
 #root,
 #__next {
-    isolation: isolate;
+  isolation: isolate;
 }
 
 /**********************MAIN CSS************************/
 .libraryDisplayContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 20%));
-    padding: 1em;
-    gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 20%));
+  padding: 1em;
+  gap: 10px;
 }
 
 .bookContainer {
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 1em;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 dialog[open] {
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    width: 25vw;
-    min-width: 300px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 25vw;
+  min-width: 300px;
 }
 
 .closeDialogBtn {
-    align-self: flex-end;
+  align-self: flex-end;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .bookDetails {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
-.bookDetails>div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.bookDetails > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

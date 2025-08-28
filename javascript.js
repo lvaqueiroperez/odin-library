@@ -105,6 +105,28 @@ const initModule = (function () {
   function bindEvents() {
     addBookBtn.addEventListener("click", (e) => {
       dialog.showModal();
+
+      // init form listeners, close them when submited or closed
+      const form = document.querySelector("#addBookForm");
+
+      form.addEventListener("input", function validate(e) {
+        switch (e.target.id) {
+          case "title":
+            if (e.target.validity.tooShort) {
+              e.target.setCustomValidity(
+                "Title must be at least 4 character long!"
+              );
+            } else if (e.target.validity.tooLong) {
+              e.target.setCustomValidity(
+                `Title must be shorter than 15 characters, you have introduced ${e.target.value.length} characters.`
+              );
+            } else {
+              e.target.setCustomValidity("");
+            }
+
+            break;
+        }
+      });
     });
 
     dialog.addEventListener("click", (e) => {
@@ -118,7 +140,9 @@ const initModule = (function () {
 
         case "submitBookBtn":
           // con esto evito usar el botón con type="submit", simplemente me fijo en el click del botón
+
           if (form.checkValidity()) {
+            // (submit programáticamente)
             let bookDetails = Array.from(
               document.querySelectorAll("input, select")
             );
@@ -130,9 +154,8 @@ const initModule = (function () {
               bookDetails[3].value
             );
           } else {
-            console.log("not valid!");
+            form.requestSubmit();
           }
-
           break;
       }
     });
